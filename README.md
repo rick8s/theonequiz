@@ -28,10 +28,20 @@ http-server
 ## JavaScript concepts
 1. Explain what hoisting is. Provide your answer below.
 
-  **Student answer: **
-1. What is a callback? Why do we use them in JavaScript? Provide your answer, and code a simple example below.
+JavaScript will automatically move (hoist) var declarations to the top of the current scope in which they are declared.
 
   **Student answer: **
+1. What is a callback? Why do we use them in JavaScript? Provide your answer, and code a simple example below.
+To ensure that one code is executed before another code that relies on its outcome is executed.
+
+  **Student answer: **
+
+  $.ajax({
+    url: "./data/animals.json"
+  })
+  .done(function(animals_data) {
+    console.log(animals_data);
+  })
 
 ## Functions and operators
 
@@ -62,17 +72,40 @@ http-server
 1. What are the four HTTP verbs that you can use in an XHR that correspond to the CRUD actions (create, read, update, delete)?
   **Student answer:**
 
+  PUT, POST, GET, DELETE
+
 1. Why did we use Promises when dealing with asynchronous XHR calls?
   **Student answer:**
 
+  So that other code that relies on an operation will know when it has executed successfully or if it has failed.
+
+
 1. Provide a simple example of the syntax for handling a Promise.
   **Student answer:**
+
+  return function() {
+  var deferred = Q.defer();
+
+  $.ajax({
+    url: "./data/animals.json"
+  })
+  .done(function(animals_data) {
+    deferred.resolve(animals_data);
+  })
+  .fail(function(xhr, status, error){
+    deferred.reject(error);
+  });
+    return deferred.promise;
+};
+
 
 ## Scope and this
 
 What gets logged to the console when the following code executes? Explain why.
 
 **Student answer: **
+
+42 because it is being passed in from the global scope?
 
 ```
 var answer = "42";
